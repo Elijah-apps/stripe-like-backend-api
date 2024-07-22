@@ -1,0 +1,618 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Payment Gateway API",
+      "version": "1.0.0",
+      "description": "API documentation for the Payment Gateway System"
+    },
+    "paths": {
+      "/api/payments/{payment_id}": {
+        "post": {
+          "summary": "Create a new payment",
+          "parameters": [
+            {
+              "name": "payment_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Payment"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Payment created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Payment"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Payment already exists"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get payment details",
+          "parameters": [
+            {
+              "name": "payment_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Payment"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Payment not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update an existing payment",
+          "parameters": [
+            {
+              "name": "payment_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentUpdate"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Payment updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Payment"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Payment not found"
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a payment",
+          "parameters": [
+            {
+              "name": "payment_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Payment deleted",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Payment not found"
+            }
+          }
+        }
+      },
+      "/api/payment_methods/{method_id}": {
+        "post": {
+          "summary": "Create a new payment method",
+          "parameters": [
+            {
+              "name": "method_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethod"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Payment method created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PaymentMethod"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Payment method already exists"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get payment method details",
+          "parameters": [
+            {
+              "name": "method_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PaymentMethod"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Payment method not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update an existing payment method",
+          "parameters": [
+            {
+              "name": "method_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentMethodUpdate"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Payment method updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/PaymentMethod"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Payment method not found"
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a payment method",
+          "parameters": [
+            {
+              "name": "method_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Payment method deleted",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Payment method not found"
+            }
+          }
+        }
+      },
+      "/api/profiles/{profile_id}": {
+        "post": {
+          "summary": "Create a new account profile",
+          "parameters": [
+            {
+              "name": "profile_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountProfile"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Account profile created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AccountProfile"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Account profile already exists"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get account profile details",
+          "parameters": [
+            {
+              "name": "profile_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AccountProfile"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Account profile not found"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update an existing account profile",
+          "parameters": [
+            {
+              "name": "profile_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountProfileUpdate"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Account profile updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AccountProfile"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Account profile not found"
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete an account profile",
+          "parameters": [
+            {
+              "name": "profile_id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Account profile deleted",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "detail": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Account profile not found"
+            }
+          }
+        }
+      },
+      "/api/charges": {
+        "get": {
+          "summary": "List all charges",
+          "responses": {
+            "200": {
+              "description": "Successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "amount": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "currency": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new charge",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "format": "float"
+                    },
+                    "currency": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["amount", "currency", "description"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Charge created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "amount": {
+                        "type": "number",
+                        "format": "float"
+                      },
+                      "currency": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid input"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Payment": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "format": "float"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          },
+          "required": ["amount", "currency", "description"]
+        },
+        "PaymentUpdate": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "number",
+              "format": "float"
+            },
+            "currency": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            }
+          }
+        },
+        "PaymentMethod": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "details": {
+              "type": "object"
+            }
+          },
+          "required": ["type", "details"]
+        },
+        "PaymentMethodUpdate": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "details": {
+              "type": "object"
+            }
+          }
+        },
+        "AccountProfile": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            }
+          },
+          "required": ["name", "email"]
+        },
+        "AccountProfileUpdate": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "phone": {
+              "type": "string"
+            },
+            "address": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  
